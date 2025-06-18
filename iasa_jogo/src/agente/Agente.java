@@ -43,7 +43,7 @@ public abstract class Agente {
 	 * ações de acordo com o seu controlo.
 	 * <p>
 	 * Segundo o diagrama de atividades do slide 10 do PDF P1-iasa-proj, o método
-	 * executar() tem que precepcionar; processar essa precessão (que é uma ação);
+	 * executar() tem que precepcionar; processar essa preceção (que é uma ação);
 	 * e por fim é fazer atuar essa ação.
 	 */
     public void executar() {
