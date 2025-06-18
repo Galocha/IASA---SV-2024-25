@@ -1,6 +1,6 @@
 from agente.controlo_delib.mec_delib import MecDelib
 from agente.controlo_delib.modelo.modelo_mundo import ModeloMundo
-
+from sae.ambiente.elemento import Elemento
 
 class ControloDelib():
     """
@@ -130,6 +130,8 @@ class ControloDelib():
         deliberar
         """
         self.__objectivos = self.__mec_delib.deliberar()
+        if self.__objectivos is None:
+            self.__objectivos = [self.__modelo_mundo.estado_inicial]
 
     
     def __planear(self):
@@ -145,6 +147,15 @@ class ControloDelib():
         decide como fazer, gerando um plano de ação
         - P4-iasa-proj.pdf, página 3: o método está presente na arquitetura
         do ControloDelib
+
+        Exercício da aula do dia 03/06:
+        - A razão para ter feito isto aqui é que o método `planear` é responsável por
+        gerar um plano de ação, ou seja, o que o agente deve fazer a seguir, por isso,
+        caso já não haja objetivos, o agente deve voltar ao estado inicial
+        - Também foi necessário adicionar o necessário para isto funcionar no
+        modelo_mundo, pois o agente deve ser capaz de voltar ao estado inicial em
+        qualquer tipo de ambiente/mundo. Isto é, o agente deve ser capaz de voltar
+        ao estado por onde começou o seu percurso em qualquer tipo de ambiente
         """
         if self.__objectivos:
             self.__plano = self.__planeador.planear(self.__modelo_mundo, self.__objectivos)

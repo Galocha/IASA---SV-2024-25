@@ -76,7 +76,7 @@ class MecDelib():
         Ordena os objetivos por proximidade ao agente
         
         Parâmetros:
-        - lista de objetivos: lLista de estados alvo a serem ordenados
+        - lista de objetivos: lista de estados alvo a serem ordenados
             
         Retorno:
         - lista de objetivos: objetivos ordenados por distância crescente

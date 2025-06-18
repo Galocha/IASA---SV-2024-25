@@ -28,6 +28,7 @@ class ModeloMundo(ModeloPlan):
         interna do ambiente
         - P4-iasa-proj.pdf, página 3: esta classe, no que toca a código estrutural,
         foi implementado a partir do diagrama
+        - P4-iasa-proj.pdf, página 8: esta classe especializa de ModeloPlan
         - O código comportamental foi implementado a partir da explicação do docente
         """
         self.__estado_agente = None
@@ -37,6 +38,7 @@ class ModeloMundo(ModeloPlan):
         #self - está a passar a própria instância do modelo de mundo, ou seja, os operadores
         #que estão a ser construídos são do próprio modelo
         self.__alterado = False
+        self.estado_inicial = None #necessário para o exercício da aula de 03/06, para o agente poder voltar ao estado inicial
     
     def obter_estado(self):
         """
@@ -100,8 +102,15 @@ class ModeloMundo(ModeloPlan):
             - Atualiza o map de elementos
             - Reconstrói a lista de estados válidos
             - Marca o modelo como alterado
+        
+        Exercício da aula de 03/06:
+        - Como o método `actualizar` atualiza o modelo do mundo com base nas novas informações 
+        percebidas do ambiente, foi necessário, no início do método, verificar se o estado inicial
+        já tinha sido definido. Se não, define-o com a posição atual do agente
         """
         self.__estado_agente = EstadoAgente(percepcao.posicao)
+        if self.estado_inicial is None:
+            self.estado_inicial = EstadoAgente(percepcao.posicao)
         self.__alterado = self.__elementos != percepcao.elementos
         if self.__alterado:
             self.__elementos = percepcao.elementos

@@ -36,8 +36,8 @@ class OperadorMover(Operador):
         """
         self.__modelo_mundo = modelo_mundo
         self.__direccao = direccao
-        self.__ang = direccao.value
-        self.__accao = Accao(direccao)
+        self.__ang = self.__direccao.value
+        self.__accao = Accao(self.__direccao)
     
     def aplicar(self, estado):
         """
@@ -65,6 +65,12 @@ class OperadorMover(Operador):
 
         Retorno:
         - nova_posicao - nova posição após a translação
+
+        Fundamentação teórica:
+        - P4-iasa-proj.pdf, página 5: o cálculo do movimento é feito
+        por translação geométrica, onde:
+            - dx = passo * cos(angulo)
+            - dy = -passo * sin(angulo)
         """
         x, y = posicao
         dx = round(dist_desl * math.cos(ang_desl))

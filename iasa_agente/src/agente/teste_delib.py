@@ -7,7 +7,29 @@ from sae.ambiente.ambiente import Ambiente
 from sae.agente.transdutor import Transdutor #tem o método percecionar
 from sae.defamb import DEF_AMB
 
+# ---------------------------------------
+# Testes de integração do mecanismo de deliberação e planeamento
+#
+# Fundamentação teórica:
+# - P4-iasa-proj.pdf, página 3: demonstra a arquitetura deliberativa, incluindo
+#   os módulos de perceção, modelo do mundo, deliberação e planeamento
+# - Os métodos deste ficheiro simulam o ciclo de funcionamento de um agente
+#   deliberativo, testando a atualização do modelo do mundo, a geração de
+#   objetivos e a criação de planos
+# ---------------------------------------
+
 def obter_percecao():
+    """
+    Obter perceção do ambiente 
+
+    Fundamentação teórica:
+    - O agente obtém perceções do ambiente através do transdutor, 
+    que converte o estado do ambiente em informação sensorial
+    - Este método simula a perceção inicial do agente num ambiente específico
+
+    Retorno:
+    - Percepcao: objeto com a perceção sensorial do ambiente
+    """
     num_amb = 4
     ambiente = Ambiente(DEF_AMB[num_amb])
     transdutor = Transdutor()
@@ -17,6 +39,13 @@ def obter_percecao():
 def actualizar_modelo_mundo():
     """
     Teste de atualização do modelo do mundo
+
+    Fundamentação teórica:
+    - O modelo do mundo é atualizado com base nas perceções do ambiente, 
+    permitindo ao agente manter uma representação interna do estado do ambiente
+
+    Retorno:
+    - ModeloMundo: modelo atualizado após assimilar a perceção
 
     >>> modelo_mundo = actualizar_modelo_mundo()
     >>> modelo_mundo.alterado
@@ -45,6 +74,15 @@ def actualizar_modelo_mundo():
 
 def gerar_objectivos():
     """
+    Teste de geração de objetivos pelo mecanismo de deliberação
+
+    Fundamentação teórica:
+    - A deliberação é responsável por decidir o que fazer, 
+    gerando objetivos a partir do modelo do mundo
+
+    Retorno:
+    - list: lista de objetivos (estados alvo) ordenados pela distância até ao agente
+
     >>> objectivos = gerar_objectivos()
     >>> len(objectivos)
     3
@@ -56,6 +94,14 @@ def gerar_objectivos():
 def gerar_plano():
     """
     Teste de geração de plano
+
+    Fundamentação teórica:
+    - O planeador recebe o modelo do mundo e os objetivos, 
+    gerando um plano de ações para atingir os fins deliberados
+
+    Retorno:
+    - Plano: plano de ações para atingir os objetivos
+
     >>> plano = gerar_plano()
     >>> plano.dimensao
     37
@@ -69,4 +115,4 @@ def gerar_plano():
 # Executar teste
 if __name__ == "__main__":
     import doctest
-    doctest.testmod()
+    doctest.testmod() #executar os testes a partir das instruções de docstring
